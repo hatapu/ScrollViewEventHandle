@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         scrollView.contentSize = CGSizeMake(200, 500)
         scrollView.backgroundColor = UIColor.yellowColor()
         scrollView.delaysContentTouches = false
+        scrollView.canCancelContentTouches = false
         scrollView.panGestureRecognizer.cancelsTouchesInView = false
         self.view.addSubview(scrollView)
         
@@ -58,25 +59,25 @@ class ViewController: UIViewController {
 
 class MyScrollView : UIScrollView {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let y_val = touches.first!.locationInView(self).y
+        let y_val = touches.first!.locationInView(self.superview).y
         print("scroll touchesBegan" + String(y_val))
         super.nextResponder()?.touchesBegan(touches, withEvent: event)
     }
 
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let y_val = touches.first!.locationInView(self).y
+        let y_val = touches.first!.locationInView(self.superview).y
         print("scroll touchesMoved" + String(y_val))
         super.nextResponder()?.touchesMoved(touches, withEvent: event)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let y_val = touches.first!.locationInView(self).y
+        let y_val = touches.first!.locationInView(self.superview).y
         print("scroll touchesEnded" + String(y_val))
         super.nextResponder()?.touchesEnded(touches, withEvent: event)
     }
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        let y_val = touches!.first!.locationInView(self).y
+        let y_val = touches!.first!.locationInView(self.superview).y
         print("scroll touchesCanceled" + String(y_val))
         super.nextResponder()?.touchesCancelled(touches, withEvent: event)
     }
